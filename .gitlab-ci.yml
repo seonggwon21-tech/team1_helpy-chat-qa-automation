@@ -1,0 +1,25 @@
+stages:
+  - test
+  - notify
+
+variables:
+  HEADLESS: "true"
+
+ui_test:
+  stage: test
+  tags:
+    - ksg
+
+  before_script:
+    - C:\Python314\python.exe -m pip install -r requirements.txt
+
+  script:
+    - C:\Python314\python.exe -m pytest -v -m "not slow" tests/test_plus_menu.py tests/test_new_chat.py tests/test_input_features.py tests/test_lnb_management.py tests/test_message_send.py
+
+send_slack:
+  stage: notify
+  tags:
+    - ksg
+  when: always
+  script:
+    - C:\Python314\python.exe -c "import requests,os; requests.post(os.environ['SLACK_WEBHOOK_URL'], json={'text':'[CI] 테스트 완료'}, headers={'Content-Type':'application/json'})"

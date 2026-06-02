@@ -1,0 +1,24 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+logs/
+.DS_Store
+venv/
+
+# Claude Code
+.claude/
+
+# Temporary / local files
+local_changes.patch
+docs/
+counter.txt
+good.txt
+replacements.txt
+
+# Backup CI files
+*backup*
+*.backup
+
+# Test artifacts
+test_data/
