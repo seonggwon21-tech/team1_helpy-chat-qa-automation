@@ -34,6 +34,10 @@ first-project/
 │  ├─ deep_investigation_page.py
 │  ├─ behavior_and_opinions_page.py
 │  ├─ detailed_specialty_page.py
+│  ├─ agent_add_page.py         # 에이전트 추가
+│  ├─ agent_filter_page.py      # 에이전트 필터
+│  ├─ agent_myagent_page.py     # 내 에이전트 관리
+│  ├─ agent_search_page.py      # 에이전트 검색
 │  └─ register_page.py          # 신규 계정 생성 보조
 ├─ tests/                       # Pytest 테스트 시나리오
 ├─ test_data/                   # 업로드 테스트용 파일
@@ -186,18 +190,6 @@ variables:
   HEADLESS: "true"
 ```
 
-아침마다 확인 GitLab Runner 실행 흐름: 프로젝트 진행단계에서 CI수행하는 순서
-
-```text
-0. 프로젝트 폴더 이동 - cd C:\Users\내이름\Desktop\my_project
-0.1 가상환경 활성화 - venv\Scripts\activate
-0.2 최신코드 가져오기 - git pull 
-1. GitLab Runner 실행 상태 확인 - cd C:\GitLab-Runner > 
-2. 코드 변경 및 로컬 테스트 - pytest
-3. git add / git commit / git push
-4. GitLab Pipeline 결과 확인 
-```
-
 ## 작성 규칙
 
 - 화면 조작은 가능한 한 `pages/`의 Page Object 클래스에 둡니다.
@@ -221,6 +213,18 @@ variables:
 | GitLab CI/CD | 기본 테스트 잡 구성 |
 | 테스트 수집 검증 | 45 tests collected |
 
+## 팀 구성 및 담당 역할
+
+5인 팀 프로젝트로 진행했습니다. 각 팀원이 기능 영역을 나눠 Page Object와 테스트 코드를 담당했으며, 저(김성권)는 아래 영역을 맡았습니다.
+
+| 담당 영역 | 내용 |
+|---|---|
+| 프레임워크 설계 | `BasePage` 방어적 클릭 패턴 (visibility → scrollIntoView → element_to_be_clickable → JS fallback 4단계), `conftest.py` fixture 구조 설계 |
+| 새 대화 기능 UI 자동화 | `test_new_chat.py` · `test_message_send.py` · `test_lnb_management.py` · `test_plus_menu.py` · `test_input_features.py` |
+| SSO 인증 처리 | CDP 쿠키 주입으로 매 테스트 SSO 리다이렉트 5~8초 제거 — TC당 실행 시간 단축, 팀 전체 86 TC 기준 약 7~11분 절감 |
+| CI/CD | GitLab Runner 기반 `.gitlab-ci.yml` 구성 |
+| 결함 추적 | 미해결 결함 `xfail(strict=True)` 처리로 파이프라인 유지 및 자동 감지 체계 구축 |
+
 ## 버전 관리 제외 대상
 
 현재 `.gitignore`에는 다음 항목이 제외되어 있습니다.
@@ -237,4 +241,3 @@ venv/
 local_changes.patch
 ```
 
-parametrize 1
