@@ -1,5 +1,9 @@
 # HelpyChat QA Automation
 
+> 📌 **이 저장소는 엘리스 KDT 5인 팀 프로젝트의 협업 원본입니다.**
+> 제가 담당한 영역만 별도로 정리한 **개인 포트폴리오**는 👉 [**helpy-chat-qa-automation**](https://github.com/seonggwon21-tech/helpy-chat-qa-automation) 을 참고해 주세요.
+> (담당 역할은 아래 [팀 구성 및 담당 역할](#팀-구성-및-담당-역할) 참고)
+
 HelpyChat 서비스의 주요 사용자 흐름을 검증하는 Python 기반 E2E UI 자동화 프로젝트입니다.
 Selenium WebDriver와 Pytest를 사용하며, 화면 조작 로직은 Page Object Model(POM) 구조로 분리되어 있습니다.
 
